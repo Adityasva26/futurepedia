@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from 'react-toastify';
 import Link from "next/link";
-const url ="http://192.168.1.64:4000/api/futurePedia/"
+import { URL } from '../../utility/api';
 function Favourites() {
     const [toggle, settoggle] = useState("product")
     const [data, setData] = useState([])
@@ -15,7 +15,7 @@ function Favourites() {
     setuserData(JSON.parse(window.localStorage.getItem('data')))
 },[])
     const favouritesdata = (e) => {
-        axios.post(`${url}favouritesList`, { id: e })
+        axios.post(`${URL}favouritesList`, { id: e })
             .then((response) => {
                 setData(response.data.data)
             })
@@ -27,7 +27,7 @@ function Favourites() {
         if (g == undefined) {
             toast.error('Login before adding product to Favourite!');
         }else{
-            axios.post(`${url}Favourites`, { user_id:g,
+            axios.post(`${URL}Favourites`, { user_id:g,
                 product_id:e,
                 heart_status:h,
                 type:d})

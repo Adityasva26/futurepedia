@@ -3,13 +3,13 @@ import Footer from "./footer";
 import { useEffect ,useState } from "react";
 import axios from "axios";
 import moment from "moment/moment";
-const url ="http://192.168.1.64:4000/api/futurePedia/"
+import { URL } from '../../utility/api';
 
 function NewsLetter() {
     const [data,setData]=useState([])
     useEffect(()=>{homeApi()},[])
     const homeApi = (e) => {  
-        axios.get(`${url}BlogList`)
+        axios.get(`${URL}BlogList`)
             .then((response) => {
                 console.log(response.data)
                 setData(response.data.data)

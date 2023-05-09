@@ -8,7 +8,7 @@ import Modal from 'react-bootstrap/Modal';
 import Link from "next/link";
 import { toast } from 'react-toastify';
 import Carousel from "react-elastic-carousel";
-const url ="http://192.168.1.64:4000/api/futurePedia/"
+import { URL } from '../../utility/api';
 const breakPoints = [
     { width: 1, itemsToShow: 2 },
      { width: 550, itemsToShow: 3 },
@@ -41,7 +41,7 @@ function HomePage() {
     }, [])
 
     const homeApi = (e) => {
-        axios.post(`${url}home`, { user_id: e })
+        axios.post(`${URL}home`, { user_id: e })
             .then((response) => {
                 setData(response.data)
             })
@@ -58,7 +58,7 @@ function HomePage() {
         }
     }
     const regexAPi = (e) => {
-        axios.post(`${url}RegexApi`, { title: e })
+        axios.post(`${URL}RegexApi`, { title: e })
             .then(response => {
                 console.log(response.data);
                 setregexList(response.data.data)
@@ -73,7 +73,7 @@ function HomePage() {
         if (g == undefined) {
             toast.error('Login before adding product to Favourite!');
         } else {
-            axios.post(`${url}Favourites`, {
+            axios.post(`${URL}Favourites`, {
                 user_id: g,
                 product_id: e,
                 heart_status: h,
@@ -91,7 +91,7 @@ function HomePage() {
 
     const filter = (e, g, h) => {
         setcategoryId(e)
-        axios.post(`${url}filter`, {
+        axios.post(`${URL}filter`, {
             category: e,
             pricing: pricing.length == 0 ? null : pricing,
             feature: feature.length == 0 ? null : feature,

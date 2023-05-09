@@ -7,8 +7,7 @@ import axios from "axios";
 import Link from "next/link";
 import moment from "moment/moment";
 import { toast } from 'react-toastify';
-
-const url ="http://192.168.1.64:4000/api/futurePedia/"
+import { URL } from '../../utility/api';
 function Discover() {
 
     const router = useRouter()
@@ -38,7 +37,7 @@ function Discover() {
             console.log("product_id",e)
             console.log("heart Status",h)
             console.log("userId",g)
-            axios.post(`${url}Favourites`, { user_id:g,
+            axios.post(`${URL}Favourites`, { user_id:g,
                 product_id:e,
                 heart_status:h,
                 type:"product"})

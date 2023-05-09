@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from 'next/router'
 import { toast } from "react-toastify";
-const url ="http://192.168.1.64:4000/api/futurePedia/"
+import { URL } from '../../utility/api';
 
 function SubmitTool() {
     const router = useRouter()
@@ -25,7 +25,7 @@ function SubmitTool() {
         setImage(e.target.files[0]);
     }
     const categoryList = () => {
-        axios.post(`${url}dropdown`,{type:"product"})
+        axios.post(`${URL}dropdown`,{type:"product"})
             .then((response) => {
                 setcategoryListing(response.data.data)
             })
@@ -58,7 +58,7 @@ function SubmitTool() {
             let config = {
                 method: 'post',
                 maxBodyLength: Infinity,
-                url: `${url}addproduct`,
+                url: `${URL}addproduct`,
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
                 },

@@ -2,12 +2,12 @@ import Header from "./header";
 import Footer from "./footer";
 import { useEffect ,useState } from "react";
 import axios from "axios";
-const url ="http://192.168.1.64:4000/api/futurePedia/"
+import { URL } from '../../utility/api';
 function AiToolProject() {
     const [data,setData]=useState([])
     useEffect(()=>{homeApi()},[])
     const homeApi = (e) => {  
-        axios.get(`${url}categoryList`)
+        axios.get(`${URL}categoryList`)
             .then((response) => {
                 console.log(response.data)
                 setData(response.data.data)

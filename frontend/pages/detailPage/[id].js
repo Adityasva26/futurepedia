@@ -6,7 +6,7 @@ import { useState } from "react";
 import axios from "axios";
 import moment from "moment/moment";
 import { toast } from 'react-toastify';
-const URL = "http://192.168.1.64:4000/api/futurePedia/"
+import { URL } from '../../utility/api';
 function DetailPage() {
     const router = useRouter()
 	const id = router.query.id

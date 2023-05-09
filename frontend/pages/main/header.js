@@ -8,7 +8,7 @@ import Link from "next/link";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router'
-const url = "http://192.168.1.64:4000/api/futurePedia/"
+import { URL } from '../../utility/api';
 function Header() {
     const router = useRouter()
     const [show, setShow] = useState(false);
@@ -59,7 +59,7 @@ function Header() {
 
     const componentClicked = (response) => {
         console.log(response);
-        axios.post(`${url}socialregister`, { email: response.email, full_name: response.name, social_id: response.userID, social_name: response.graphDomain })
+        axios.post(`${URL}socialregister`, { email: response.email, full_name: response.name, social_id: response.userID, social_name: response.graphDomain })
             .then(response => {
                 console.log(response.data);
                 window.localStorage.setItem("data", JSON.stringify(response.data.data))
@@ -84,7 +84,7 @@ function Header() {
     }
     function onLogin() {
         if (validateForm(loginForm)) {
-            axios.post(`${url}login`, { email: loginForm.email, password: loginForm.password })
+            axios.post(`${URL}login`, { email: loginForm.email, password: loginForm.password })
                 .then(response => {
                     console.log(response.data);
                     window.localStorage.setItem("data", JSON.stringify(response.data.data))

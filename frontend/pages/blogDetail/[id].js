@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
-const URL ="http://192.168.1.64:4000/api/futurePedia/"
+import { URL } from '../../utility/api';
 
 function BlogDetail() {   
 	console.log("url",process.env.URL)

@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { useRouter } from 'next/router'
 import { toast } from "react-toastify";
-const url ="http://192.168.1.64:4000/api/futurePedia/"
+import { URL } from '../../utility/api';
 
 function SubmitNews() {
     const router = useRouter()
@@ -25,7 +25,7 @@ function SubmitNews() {
     },[])
   
     const categoryList = () => {
-        axios.post(`${url}dropdown`,{type:"news"})
+        axios.post(`${URL}dropdown`,{type:"news"})
             .then((response) => {
                 setcategoryListing(response.data.data)
             })
@@ -52,7 +52,7 @@ function SubmitNews() {
             let config = {
                 method: 'post',
                 maxBodyLength: Infinity,
-                url: `${url}addnews`,
+                url: `${URL}addnews`,
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
                 },

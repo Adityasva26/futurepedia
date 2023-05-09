@@ -5,7 +5,7 @@ import { useState , useEffect } from "react";
 import moment from "moment/moment";
 import { toast } from 'react-toastify';
 import Link from "next/link";
-const url ="http://192.168.1.64:4000/api/futurePedia/"
+import { URL } from '../../utility/api';
 
 function News() {
     const [data,setData] = useState([])
@@ -16,7 +16,7 @@ function News() {
     },[])
     const newsAPI = (e) => {
         console.log("e",e)
-        axios.post(`${url}newssdata`, { user_id: e })
+        axios.post(`${URL}newssdata`, { user_id: e })
             .then((response) => {
                 setData(response.data.data)
             })
@@ -32,7 +32,7 @@ function News() {
             console.log("product_id",e)
             console.log("heart Status",h)
             console.log("userId",g)
-            axios.post(`${url}Favourites`, { user_id:g,
+            axios.post(`${URL}Favourites`, { user_id:g,
                 product_id:e,
                 heart_status:h,
                 type:"news"})

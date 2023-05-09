@@ -4,7 +4,7 @@ import { useState,useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
 import moment from "moment/moment";
-const url ="http://192.168.1.64:4000/api/futurePedia/"
+import { URL } from '../../utility/api';
 
 function TodayTool() {
     const [userData, setuserData] = useState({});
@@ -14,7 +14,7 @@ function TodayTool() {
         todaytoolFunction(JSON.parse(window.localStorage.getItem('data'))?.id)
     }, [])
     const todaytoolFunction = (e) => {
-        axios.post(`${url}todayTools`, { user_id: e })
+        axios.post(`${URL}todayTools`, { user_id: e })
             .then((response) => {
                 setData(response.data)
             })
