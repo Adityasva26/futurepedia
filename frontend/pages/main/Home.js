@@ -16,6 +16,8 @@ const breakPoints = [
     { width: 991, itemsToShow: 6 },
     { width: 1200, itemsToShow: 6 },
 ];
+
+// test
 function HomePage() {
     const [data, setData] = useState({})
     const [show, setShow] = useState(false);
