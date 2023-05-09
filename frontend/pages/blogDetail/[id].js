@@ -4,22 +4,31 @@ import { useRouter } from 'next/router';
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
-
+const URL ="http://192.168.1.64:4000/api/futurePedia/"
 
 function BlogDetail() {   
 	console.log("url",process.env.URL)
+	const [share, setShare] = useState("share-btn");
 	const router = useRouter()
 	const id = router.query.id
 	const [data,setdata]=useState({})
      useEffect(()=>{getByid()},[id])
 	 async function getByid () {
-		axios.post(`${process.env.URL}BlogById`, { id: id })
+		axios.post(`${URL}BlogById`, { id: id })
 		.then(response => {
-			setdata(response.data.data)
+			setdata(response.data)
 		})
 		.catch(error => {
 			console.log(error);
 		});
+	 }
+	 const ShareButton=()=>{
+		if(share=="share-btn"){
+		 setShare("share-btn socialopen")
+		}
+		else{
+		 setShare("share-btn")
+		}
 	 }
     return ( <>
     <Header/>
@@ -41,27 +50,20 @@ function BlogDetail() {
 					<div class="Blog-details-main">
 						<div class="Blog-details-content">
 							<p>Hey there, hope you all are having a fantastic weekend!</p>
-							<p>{data.paragraph}</p>
+							<p>{data?.data?.paragraph}</p>
 							<p>We have added 219 new AI tools since our last issue. Here are some of the most interesting ones -</p>
 						</div>
 
 						<div class="ai-tools">
 							<h3>AI Tools of the Week</h3>
-							<p><a href="#">Monica </a>- ChatGPT powered AI assistant for the browser *</p>
-							<p><a href="#">GPT Lab </a>- Chat or build GPT-based chatbots on an all-in-one platform.</p>
-							<p><a href="#">Miniapps.ai  </a>- Easily create, use and share AI-powered applications for free</p>
-							<p><a href="#">Superpower ChatGPT </a> - Use additional features with ChatGPT</p>
-							<p><a href="#">Tammy AI </a> - YouTube summaries for free. 10x your learning speed today.</p>
-							<p><a href="#">GPTforSlides </a>  - Generate beautiful presentations with images using AI</p>
-							<p><a href="#">WOXO VidGPT </a> - Create Videos in Minutes with ChatGPT</p>
-							<p><a href="#">Samwell AI </a> - AI essay writer, assistant, and plagiarism-free content creator</p>
+							{data?.Products?.map((item)=><p><a href={`/detailPage/${item?._id}`}>{item.title} </a>- {item.short_discription}</p>)}
 						</div>
 
 						<div class="ai-tools">
 							<h3>AI Image of the Week</h3>
 
 							<div class="Blog-details-img">
-								<img src={data.image}/>
+								<img src={data?.data?.image}/>
 							</div>
 							<p>Mona Lisa as a modern woman</p>
 								<p><a href="#">Source</a></p>

@@ -2,7 +2,7 @@ import Header from "./header";
 import Footer from "./footer";
 import { useEffect ,useState } from "react";
 import axios from "axios";
-const url ="http://192.168.1.36:4000/api/futurePedia/"
+const url ="http://192.168.1.64:4000/api/futurePedia/"
 function AiToolProject() {
     const [data,setData]=useState([])
     useEffect(()=>{homeApi()},[])
@@ -28,7 +28,7 @@ function AiToolProject() {
                 </nav>
             </div>
         </div>
-        <div class="submit-form mt40 mb40">
+        <div class="submit-form category-page mt40 mb40">
             <div class="container">
 
                 <div class="row">
@@ -38,8 +38,8 @@ function AiToolProject() {
                             <p>Browse all categories at one glance.</p>
                            
 
-                           <ul>
-                            {data?.map((item)=><li>{item.title}</li>)}
+                           <ul className="cat-list-cls">
+                            {data?.map((item)=><li>{item.title}<span>1</span></li>)}
                            </ul>
                         </div>
                     </div>

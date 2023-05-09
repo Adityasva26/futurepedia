@@ -67,6 +67,7 @@ router.post("/filter",filter)
 router.post("/discover",discover)
 router.post("/todayTools",todayTools)
 router.post("/todaynews",todaynews)
+router.get("/test",test)
 module.exports = router;
 
 
@@ -392,5 +393,12 @@ function todaynews(req, res,next){
   userController
     .todaynews(req, res)
     .then((data) => console.log("todaynews"))
+    .catch((err) => next(err));
+}
+function test(req, res,next){
+  console.log("test")
+  userController
+    .test(req, res)
+    .then((data) => console.log("test"))
     .catch((err) => next(err));
 }

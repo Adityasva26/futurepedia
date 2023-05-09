@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { useRouter } from 'next/router'
 import { toast } from "react-toastify";
-const url ="http://192.168.1.36:4000/api/futurePedia/"
+const url ="http://192.168.1.64:4000/api/futurePedia/"
 
 function SubmitNews() {
     const router = useRouter()

@@ -5,7 +5,7 @@ import { useState , useEffect } from "react";
 import moment from "moment/moment";
 import { toast } from 'react-toastify';
 import Link from "next/link";
-const url ="http://192.168.1.36:4000/api/futurePedia/"
+const url ="http://192.168.1.64:4000/api/futurePedia/"
 
 function News() {
     const [data,setData] = useState([])

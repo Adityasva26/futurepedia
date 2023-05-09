@@ -6,7 +6,7 @@ import { useState } from "react";
 import axios from "axios";
 import moment from "moment/moment";
 import { toast } from 'react-toastify';
-
+const URL = "http://192.168.1.64:4000/api/futurePedia/"
 function DetailPage() {
     const router = useRouter()
 	const id = router.query.id
@@ -17,7 +17,7 @@ function DetailPage() {
 		setuserData(JSON.parse(window.localStorage.getItem('data')))
 		getByid(id,JSON.parse(window.localStorage.getItem('data'))?.id)},[id])
 	 async function getByid (e,g) {
-		axios.post(`${process.env.URL}productById`, { id: id ,user_id:e})
+		axios.post(`${URL}productById`, { id: id ,user_id:e})
 		.then(response => {
 			setdata(response.data)
 		})
@@ -31,7 +31,7 @@ function DetailPage() {
         if (g == undefined) {
             toast.error('Login before adding product to Favourite!');
         } else {
-            axios.post(`${process.env.URL}Favourites`, {
+            axios.post(`${URL}Favourites`, {
                 user_id: g,
                 product_id: e,
                 heart_status: h,

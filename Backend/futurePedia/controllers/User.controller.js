@@ -28,7 +28,8 @@ module.exports = {
     filter,
     discover,
     todayTools,
-    todaynews
+    todaynews,
+    test
 }
 
 
@@ -461,7 +462,7 @@ async function Favourites(req, res) {
                             success = true;
                         }
                     });
-//run it and show    it is running
+
                     if (success) {
                         return res.status(200).json({
                             userId: req.body.user_id,
@@ -844,4 +845,32 @@ async function todaynews(req, res) {
         messgae: "success",
         status: "1"
     })
+}
+
+async function test (req,res){
+    try {
+        const startOfWeek = new Date();
+        startOfWeek.setHours(0, 0, 0, 0);
+        startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
+    
+        const endOfWeek = new Date();
+        endOfWeek.setHours(23, 59, 59, 999);
+        endOfWeek.setDate(endOfWeek.getDate() + (6 - endOfWeek.getDay()));
+    
+        const Products = await product.aggregate([
+          {
+            $match: {
+                created_at: {
+                $gte: startOfWeek,
+                $lte: endOfWeek,
+              },
+            },
+          },
+        ]);
+    
+        res.json(Products);
+      } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+      }
 }

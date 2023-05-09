@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from 'next/router'
 import { toast } from "react-toastify";
-const url ="http://192.168.1.36:4000/api/futurePedia/"
+const url ="http://192.168.1.64:4000/api/futurePedia/"
 
 function SubmitTool() {
     const router = useRouter()

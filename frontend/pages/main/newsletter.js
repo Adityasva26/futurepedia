@@ -3,7 +3,7 @@ import Footer from "./footer";
 import { useEffect ,useState } from "react";
 import axios from "axios";
 import moment from "moment/moment";
-const url ="http://192.168.1.36:4000/api/futurePedia/"
+const url ="http://192.168.1.64:4000/api/futurePedia/"
 
 function NewsLetter() {
     const [data,setData]=useState([])

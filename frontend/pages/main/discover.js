@@ -6,13 +6,16 @@ import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import moment from "moment/moment";
-const url ="http://192.168.1.36:4000/api/futurePedia/"
+import { toast } from 'react-toastify';
+
+const url ="http://192.168.1.64:4000/api/futurePedia/"
 function Discover() {
 
     const router = useRouter()
 	const id = router.query.id
 	const [data,setdata]=useState({})
 	const [userData, setuserData] = useState({});
+	const [share, setShare] = useState("share-btn");
      useEffect(()=>{getByid(JSON.parse(window.localStorage.getItem('data'))?.id)
 	 setuserData(JSON.parse(window.localStorage.getItem('data')))
 	},[])
@@ -48,6 +51,14 @@ function Discover() {
             });
         }
     }
+	const ShareButton=()=>{
+		if(share=="share-btn"){
+		 setShare("share-btn socialopen")
+		}
+		else{
+		 setShare("share-btn")
+		}
+	 }
     return ( <>
     <Header/>
     <div class="breadcums pt120 pb30">
@@ -83,8 +94,8 @@ function Discover() {
 						</div>
 						<div class="right">
 							{data.heart_status==1?<a href="#" onClick={() => favourite(data?.id,0,userData?.id,"product")} class="like-btn"><i class="fas fa-thumbs-up"></i>37</a>:<a href="#" onClick={() => favourite(data?.id,1,userData?.id,"product")} class="like-btn"><i class="far fa-thumbs-up"></i> 37</a>}
-							<div class="share-btn">
-								<div class="shr-icon">
+							<div class={share}>
+								<div class="shr-icon" onClick={()=>ShareButton()}>
 									<i class="fas fa-share-alt"></i>
 								</div>
 								<div class="social">

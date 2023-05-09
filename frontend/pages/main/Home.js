@@ -8,7 +8,7 @@ import Modal from 'react-bootstrap/Modal';
 import Link from "next/link";
 import { toast } from 'react-toastify';
 import Carousel from "react-elastic-carousel";
-const url ="http://192.168.1.36:4000/api/futurePedia/"
+const url ="http://192.168.1.64:4000/api/futurePedia/"
 const breakPoints = [
     { width: 1, itemsToShow: 2 },
      { width: 550, itemsToShow: 3 },
@@ -197,7 +197,7 @@ function HomePage() {
                             </div>
                         </div>
                         <div class="heading2 text-center">
-                            <p class="font20 clr-lightgray medium"><a href="/main/ai_Tool_Category.js">All Category...</a></p>
+                            <p class="font20 clr-lightgray medium"><a href="/main/ai_Tool_Category">All Category...</a></p>
                         </div>
                     </div>
                 </div>

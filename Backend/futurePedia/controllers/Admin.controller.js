@@ -878,10 +878,40 @@ async function BlogById(req, res) {
     var PicUrl =
       "http://" + req.get("host") + "/uploads/blog/";
   }
+  const startOfWeek = new Date();
+        startOfWeek.setHours(0, 0, 0, 0);
+        startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
+    
+        const endOfWeek = new Date();
+        endOfWeek.setHours(23, 59, 59, 999);
+        endOfWeek.setDate(endOfWeek.getDate() + (6 - endOfWeek.getDay()));
+    
+        const Products = await product.aggregate([
+          {
+            $match: {
+                created_at: {
+                $gte: startOfWeek,
+                $lte: endOfWeek,
+              },
+            },
+          },
+        ]);
+        const News = await news.aggregate([
+          {
+            $match: {
+                created_at: {
+                $gte: startOfWeek,
+                $lte: endOfWeek,
+              },
+            },
+          },
+        ]);
   const data = await blog.findOne({ _id: req.body.id })
    data.image=PicUrl+data.image
   return res.status(200).json({
     data: data,
+    Products:Products,
+    news:News,
     messgae: "success",
     status: "1"
   })

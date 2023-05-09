@@ -38,6 +38,7 @@ function jwt() {
             '/api/futurePedia/BlogById',
             '/api/futurePedia/todayTools',
             '/api/futurePedia/todaynews',
+            '/api/futurePedia/test',
             
         ]
     });

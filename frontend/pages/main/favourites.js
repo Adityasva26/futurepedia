@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from 'react-toastify';
 import Link from "next/link";
-const url ="http://192.168.1.36:4000/api/futurePedia/"
+const url ="http://192.168.1.64:4000/api/futurePedia/"
 function Favourites() {
     const [toggle, settoggle] = useState("product")
     const [data, setData] = useState([])
     const [userData, setuserData] = useState({});
+    const [toggleclass, setToggleclass] = useState({a:"active",b:""});
 
     useEffect(()=>{favouritesdata(JSON.parse(window.localStorage.getItem('data'))?.id)
     setuserData(JSON.parse(window.localStorage.getItem('data')))
@@ -39,7 +40,11 @@ function Favourites() {
             });
         }
     }
-    console.log("data",data)
+    const handleToggle = (e,g,h) => {
+        settoggle(e)
+        setToggleclass({a:g,b:h})  
+    }
+    console.log("userData",userData)
     return (<>
         <Header />
         <div class="breadcums pt120 pb30">
@@ -60,15 +65,15 @@ function Favourites() {
                     <p>These are the tools and posts you have favourited. You can remove them from your favourites by clicking the bookmark icon.</p>
                 </div>
 
-                <div class="row">
+               { userData!=null?<div class="row">
                     <div class="col-md-12">
                         <div class="favourites-inner">
                             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" onClick={() => settoggle("product")}>TOOLS</button>
+                                    <button class={`nav-link ${toggleclass?.a}`} id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true"  onClick={() => handleToggle("product","active","")}>TOOLS</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onClick={() => settoggle("news")}>NEWS</button>
+                                    <button class={`nav-link ${toggleclass?.b}`} id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onClick={() => handleToggle("news","","active")}>NEWS</button>
                                 </li>
                             </ul>
                             <div class="tab-content" id="pills-tabContent">
@@ -150,7 +155,7 @@ function Favourites() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>:<h3 className="font20 clr-white text-center">Please sign up or login to view your favourited AI tools and posts.</h3>}
             </div>
         </div>
         <Footer />
